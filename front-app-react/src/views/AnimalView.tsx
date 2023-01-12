@@ -78,7 +78,7 @@ export default function Animal() {
           onClick={() => idState? deleteAnimal(idState): console.log('no id')}>
             Supprimer
           </button>
-        </div>
+        </div><br />
       </div>
       <Animals items={animals}></Animals>
     </>
