@@ -4,17 +4,22 @@ import Animal from "./Animal"
 import Card from "./UI/Card";
 
 interface props {
-    items: animal[]
+    items: animal[],
+
 }
 
-const Animals : React.FC<props> = ({items}) =>  {
+const Animals : React.FC<props> = ({items,}) =>  {
 
     return (
+        <>
         <div className="flex justify-start flex-wrap">        
             {items.map((animal: animal) =>
                 <Animal key={animal.animalId} animal={animal} />
             )}
         </div>
+
+        </>
+
     );
 }
 
