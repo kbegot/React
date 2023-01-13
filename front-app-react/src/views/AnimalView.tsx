@@ -9,9 +9,9 @@ import { getSpaceUntilMaxLength } from "@testing-library/user-event/dist/utils";
 
 export default function Animal() {
 
-  const [nameState, setNameAnimal] = useState<string>()
-  const [idState, setIdAnimal] = useState<number>()
-  const [animals, setAnimals] = useState<animal[]>([]);
+  const [nameState, setNameAnimal] = useState<string>()   //use fore create Animal
+  const [idState, setIdAnimal] = useState<number>()       //use for delete Animal
+  const [animals, setAnimals] = useState<animal[]>([]);   //use for display Animals
 
   useEffect(() => {
     getAnimals();
@@ -80,7 +80,7 @@ export default function Animal() {
           </button>
         </div><br />
       </div>
-      <Animals items={animals}></Animals>
+      <Animals items={animals} onDelete={deleteAnimal}></Animals>
     </>
   );
 }

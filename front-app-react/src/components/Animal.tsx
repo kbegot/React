@@ -6,7 +6,7 @@ interface props {
     animal: animal
 }
 
-const Animal: React.FC<props> = ({ animal }) => {
+const Animal: React.FC<props> = ({ animal}) => {
 
     return (
         <>

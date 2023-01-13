@@ -5,16 +5,19 @@ import Card from "./UI/Card";
 
 interface props {
     items: animal[],
-
+    onDelete: (id:number) => void
 }
 
-const Animals : React.FC<props> = ({items,}) =>  {
+const Animals : React.FC<props> = ({items, onDelete}) =>  {
 
     return (
         <>
         <div className="flex justify-start flex-wrap">        
             {items.map((animal: animal) =>
-                <Animal key={animal.animalId} animal={animal} />
+            <div>
+                <Animal key={animal.animalId} animal={animal}/>
+                <a onClick={() => onDelete(parseInt(animal.animalId))}><img src="trash-alt.svg" className="ml-9 h-6 w-6 "></img></a>
+            </div>
             )}
         </div>
 
