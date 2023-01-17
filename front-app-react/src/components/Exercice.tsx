@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useReducer, useCallback } from 'react';
+import React, { useState, useEffect, useReducer, useCallback, createContext, useContext } from 'react';
+
 
 export default function Exercice() {
 
@@ -27,6 +28,7 @@ export default function Exercice() {
     const handleClick = useCallback(() => {
         setHandleCount(countHandle + 1);
     }, [countHandle])
+
     return (
         <>
             <div>

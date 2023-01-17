@@ -9,6 +9,7 @@ import { getSpaceUntilMaxLength } from "@testing-library/user-event/dist/utils";
 
 export default function Animal() {
 
+  const [newAnimals, setNewAnimals] = useState<string>();
   const [nameState, setNameAnimal] = useState<string>()   //use fore create Animal
   const [idState, setIdAnimal] = useState<number>()       //use for delete Animal
   const [animals, setAnimals] = useState<animal[]>([]);   //use for display Animals
@@ -50,6 +51,15 @@ export default function Animal() {
     }
   }
 
+  async function updateAnimals(id: number, newAnimals: any) {
+    try {
+      await axios.patch(`https://localhost:7298/UpdateAnimal/${id}`, newAnimals);
+      getAnimals();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
 
   return (
     <>
@@ -65,20 +75,38 @@ export default function Animal() {
           <button className="mt-2 bg-emerald-400 hover:bg-emerald-600 text-white font-bold py-1 px-2 rounded"
             onClick={() => addAnimal(nameState)}
           > Ajouter</button>
-        </div><br />
-      </div><br />
+        </div>
+      </div>
       <div>
         <label>Supprimer un Animal</label>
         <input type="number" className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounde transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
           onChange={(e) => setIdAnimal(parseInt(e.target.value))}
-          value={idState|| ''}
+          value={idState || ''}
         />
         <div className="text-center">
           <button className="mt-2 bg-red-400 hover:bg-red-600 text-white font-bold py-1 px-2 rounded"
-          onClick={() => idState? deleteAnimal(idState): console.log('no id')}>
+            onClick={() => idState ? deleteAnimal(idState) : console.log('no id')}>
             Supprimer
           </button>
         </div><br />
+      </div>
+      <div>
+        <div>
+          <label>Modifier un Animal</label><br />
+          <input placeholder="ID" type="number" className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounde transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            onChange={(e) => setIdAnimal(parseInt(e.target.value))}
+            value={idState || ''}
+          />
+          <input placeholder="Nouveau nom" type="textarea" className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounde transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            onChange={(e) => setNewAnimals(e.target.value)}
+            value={newAnimals || ''}
+            maxLength={15}
+          />
+          <button className="mt-2 bg-blue-400 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded"
+            onClick={() => idState ? updateAnimals(idState, { name: newAnimals }) : console.log('no id')}>
+            Modifier
+          </button>
+        </div> <br />
       </div>
       <Animals items={animals} onDelete={deleteAnimal}></Animals>
     </>

@@ -14,8 +14,8 @@ const Animals : React.FC<props> = ({items, onDelete}) =>  {
         <>
         <div className="flex justify-start flex-wrap">        
             {items.map((animal: animal) =>
-            <div>
-                <Animal key={animal.animalId} animal={animal}/>
+            <div key={animal.animalId}>
+                <Animal animal={animal}/>
                 <a onClick={() => onDelete(parseInt(animal.animalId))}><img src="trash-alt.svg" className="ml-9 h-6 w-6 "></img></a>
             </div>
             )}
